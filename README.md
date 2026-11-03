@@ -44,64 +44,55 @@ This is an important distinction: the application's final calorie calculation us
 
 ## 🚀 Getting started
 
-### 1. Get the project
+**1. Download the project**
 
-Open a terminal and clone the repository:
+Open a terminal and run:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/marco-bettoni/FoodCalories.git
 cd FoodCalories
 ```
 
-Replace `<REPOSITORY_URL>` with the URL supplied by your instructor.
+**2. Install the application**
 
-### 2. Requirements
-
-You need:
-
-- Python 3.11 or 3.12
-- Git
-- Ollama
-- The `qwen3-vl:4b-instruct` model
-
-In the PolyU laboratory, the required software and AI model may already be installed.
-
-### 3. Install and run
-
-**Windows**
-
-```bat
-setup.bat --skip-model
-run.bat
-```
-
-Use `--skip-model` when the required Ollama model is already installed.
-
-For a first-time installation where the model still needs downloading:
+On Windows:
 
 ```bat
 setup.bat
-run.bat
 ```
+
+If Ollama and the model are already installed:
+
+```bat
+setup.bat --skip-model
+```
+
+You need Python 3.11 or 3.12, Git, Ollama and the `qwen3-vl:4b-instruct` model. In the PolyU laboratory these may already be installed.
 
 **macOS / Linux**
 
 ```bash
 chmod +x setup.sh run.sh
 ./setup.sh
-./run.sh
 ```
 
-Follow any additional instructions displayed by the setup script.
+Use `./setup.sh --skip-model` when the model is already installed.
 
-Open the local Streamlit address shown in the terminal, normally:
+**3. Launch FoodCalories**
 
-`http://localhost:8501`
+```bat
+run.bat
+```
 
-Upload a photograph or paste an image using `Ctrl+V` or `Command+V`.
+On macOS / Linux use `./run.sh`.
+
+Open the local Streamlit address displayed in the terminal (normally `http://localhost:8501`).
+
+**4. Try a meal photograph**
+
+Upload or paste an image and observe the recognised ingredients and estimated calories.
 
 Example photographs for practice are in `samples/verify/`.
-
 ## 🐍 Explore the Python code
 
 The important files are:
