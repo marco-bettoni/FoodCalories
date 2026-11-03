@@ -1,0 +1,47 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Image analysis cache (user photographs / AI results)
+.cache/
+
+# Environment / secrets
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Cursor / design tooling (instructor workstation)
+.cursor/
+.impeccable/
+
+# Local instructor archives (not for student distribution)
+docs/archive/
+samples_archive/
+report_*.txt
+REPORT.txt
+scripts/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Test / coverage
+.coverage
+htmlcov/
+dist/
+build/
+*.log

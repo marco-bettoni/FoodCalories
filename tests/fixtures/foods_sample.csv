@@ -1,0 +1,12 @@
+name,alias,kcal_per_100g
+Pasta,pasta|cooked pasta|spaghetti|penne|macaroni,131
+Bacon,bacon|streaky bacon,541
+Egg,egg|boiled egg|fried egg,155
+Rice,rice|white rice|cooked white rice|steamed rice,130
+Chicken breast,chicken breast|grilled chicken breast,165
+Apple,apple|fresh apple,52
+Banana,banana|fresh banana,89
+Dark chocolate,dark chocolate|plain dark chocolate,546
+Broccoli,broccoli|steamed broccoli,34
+Ambiguous A,sharedalias|only-a,100
+Ambiguous B,sharedalias|only-b,200

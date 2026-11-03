@@ -1,0 +1,371 @@
+:root {
+  --bg: oklch(1.000 0.000 0);
+  --surface: oklch(0.985 0.000 0);
+  --ink: oklch(0.220 0.010 110);
+  --muted: oklch(0.380 0.012 110);
+  --line: oklch(0.820 0.005 110);
+  --primary: oklch(0.420 0.090 110);
+  --primary-hover: oklch(0.360 0.090 110);
+  --danger: oklch(0.450 0.120 25);
+  --focus: oklch(0.420 0.090 110);
+  --btn-on-dark: #ffffff;
+  --btn-on-primary: #ffffff;
+}
+
+html, body, [class*="css"],
+.stApp, .stMarkdown, [data-testid="stMarkdownContainer"],
+[data-testid="stAppViewContainer"] {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  color: var(--ink);
+}
+
+.stApp,
+.stApp [data-testid="stAppViewContainer"],
+.stApp [data-testid="stHeader"],
+.stApp [data-testid="stToolbar"],
+section.main {
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+}
+
+/* Force light product surface even when the browser prefers dark */
+@media (prefers-color-scheme: dark) {
+  .stApp,
+  .stApp [data-testid="stAppViewContainer"],
+  section.main {
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+  }
+}
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+.block-container {
+  max-width: 920px;
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
+}
+
+::selection {
+  background: oklch(0.900 0.040 110);
+  color: var(--ink);
+}
+
+.fc-header {
+  margin-bottom: 2.75rem;
+}
+
+.fc-brand,
+div[data-testid="stMarkdownContainer"] h1.fc-brand,
+.stMarkdown h1.fc-brand {
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 0.45rem 0 !important;
+  color: oklch(0.220 0.010 110) !important;
+  text-wrap: balance;
+}
+
+.fc-tagline,
+div[data-testid="stMarkdownContainer"] p.fc-tagline {
+  margin: 0 !important;
+  font-size: 1.05rem !important;
+  font-weight: 400 !important;
+  color: oklch(0.380 0.012 110) !important;
+}
+
+.fc-dish {
+  margin: 0 0 0.85rem 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.fc-kcal,
+div[data-testid="stMarkdownContainer"] p.fc-kcal,
+.stMarkdown p.fc-kcal {
+  margin: 0 !important;
+  font-size: clamp(2.75rem, 8vw, 5.5rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: oklch(0.220 0.010 110) !important;
+  font-variant-numeric: tabular-nums;
+  text-wrap: balance;
+}
+
+.fc-portion-weight,
+div[data-testid="stMarkdownContainer"] p.fc-portion-weight {
+  margin: 0.7rem 0 0 0 !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: oklch(0.360 0.012 110) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-serving-note {
+  margin: 0.55rem 0 0 0;
+  font-size: 0.9rem;
+  color: oklch(0.360 0.012 110);
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-note,
+div[data-testid="stMarkdownContainer"] p.fc-note {
+  margin-top: 1.25rem !important;
+  font-size: 0.9rem !important;
+  color: oklch(0.360 0.012 110) !important;
+}
+
+.fc-paste-hint {
+  margin: 0.35rem 0 1rem 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.fc-table-wrap {
+  margin-top: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.fc-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-table th,
+.fc-table td {
+  box-sizing: border-box;
+  padding: 0.95rem 1rem;
+  vertical-align: baseline;
+}
+
+.fc-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: oklch(0.360 0.012 110);
+  border-bottom: 1px solid var(--line);
+  padding-top: 1.15rem;
+  padding-bottom: 0.65rem;
+}
+
+.fc-table th:first-child,
+.fc-table td:first-child {
+  padding-left: 0.85rem;
+  text-align: left;
+}
+
+.fc-table th:nth-child(2),
+.fc-table td:nth-child(2) {
+  text-align: right;
+  white-space: nowrap;
+  width: 9rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.fc-table th:last-child,
+.fc-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+  width: 8rem;
+  padding-right: 0.85rem;
+}
+
+.fc-table td {
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.fc-table td:first-child {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  padding-right: 1.25rem;
+}
+
+.fc-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.fc-table tr.fc-total td {
+  border-top: 1.5px solid var(--primary);
+  border-bottom: none;
+  font-weight: 600;
+  color: var(--ink);
+  padding-top: 1.05rem;
+  padding-bottom: 0.35rem;
+}
+
+.fc-amount {
+  color: oklch(0.360 0.012 110);
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-kcal-cell {
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-total .fc-amount,
+.fc-total .fc-kcal-cell {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Uploader — dark control, forced white label (fixes black-on-black) */
+div[data-testid="stFileUploader"] section {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0.75rem;
+}
+
+div[data-testid="stFileUploader"] label,
+div[data-testid="stFileUploader"] small,
+div[data-testid="stFileUploader"] span,
+div[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p {
+  color: var(--ink) !important;
+}
+
+div[data-testid="stFileUploader"] button,
+div[data-testid="stFileUploader"] [data-baseweb="button"] {
+  background: var(--ink) !important;
+  background-color: var(--ink) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  color: var(--btn-on-dark) !important;
+  -webkit-text-fill-color: var(--btn-on-dark) !important;
+}
+
+div[data-testid="stFileUploader"] button,
+div[data-testid="stFileUploader"] button *,
+div[data-testid="stFileUploader"] button[kind="secondary"],
+div[data-testid="stFileUploader"] button[kind="secondary"] *,
+div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"],
+div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"] *,
+div[data-testid="stFileUploader"] [data-baseweb="button"],
+div[data-testid="stFileUploader"] [data-baseweb="button"] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+div[data-testid="stFileUploader"] button p,
+div[data-testid="stFileUploader"] button span,
+div[data-testid="stFileUploader"] button div,
+div[data-testid="stFileUploader"] button svg,
+div[data-testid="stFileUploader"] [data-baseweb="button"] p,
+div[data-testid="stFileUploader"] [data-baseweb="button"] span,
+div[data-testid="stFileUploader"] [data-baseweb="button"] div,
+div[data-testid="stFileUploader"] [data-baseweb="button"] svg {
+  background: transparent !important;
+  background-color: transparent !important;
+  fill: #ffffff !important;
+}
+
+div[data-testid="stFileUploader"] button:hover,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:hover {
+  background: oklch(0.320 0.010 110) !important;
+  background-color: oklch(0.320 0.010 110) !important;
+  color: var(--btn-on-dark) !important;
+  -webkit-text-fill-color: var(--btn-on-dark) !important;
+}
+
+div[data-testid="stFileUploader"] button:hover p,
+div[data-testid="stFileUploader"] button:hover span,
+div[data-testid="stFileUploader"] button:hover svg,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:hover p,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:hover span,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:hover svg {
+  color: var(--btn-on-dark) !important;
+  fill: var(--btn-on-dark) !important;
+  -webkit-text-fill-color: var(--btn-on-dark) !important;
+}
+
+div[data-testid="stFileUploader"] button:focus-visible,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px;
+  color: var(--btn-on-dark) !important;
+}
+
+div[data-testid="stFileUploader"] button:disabled,
+div[data-testid="stFileUploader"] button:disabled *,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:disabled,
+div[data-testid="stFileUploader"] [data-baseweb="button"]:disabled * {
+  background: oklch(0.780 0.020 110) !important;
+  color: var(--btn-on-dark) !important;
+  -webkit-text-fill-color: var(--btn-on-dark) !important;
+  opacity: 1 !important;
+}
+
+div[data-testid="stImage"] img {
+  border-radius: 12px;
+  max-height: min(52vh, 420px);
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 768px) {
+  .block-container {
+    padding-top: 2rem;
+  }
+  .fc-kcal,
+  div[data-testid="stMarkdownContainer"] p.fc-kcal,
+  .stMarkdown p.fc-kcal {
+    font-size: clamp(2.5rem, 14vw, 3.75rem) !important;
+  }
+  .fc-table-wrap {
+    margin-top: 2rem;
+    padding: 0 0.35rem;
+  }
+  .fc-table {
+    font-size: 0.92rem;
+  }
+  .fc-table th,
+  .fc-table td {
+    padding: 0.85rem 0.7rem;
+  }
+  .fc-table th:first-child,
+  .fc-table td:first-child {
+    padding-left: 0.55rem;
+  }
+  .fc-table th:nth-child(2),
+  .fc-table td:nth-child(2) {
+    width: 7rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+  .fc-table th:last-child,
+  .fc-table td:last-child {
+    width: 6.5rem;
+    padding-right: 0.55rem;
+  }
+  .fc-portion-weight,
+  div[data-testid="stMarkdownContainer"] p.fc-portion-weight {
+    font-size: 0.95rem !important;
+  }
+  div[data-testid="stImage"] img {
+    max-height: min(42vh, 320px);
+  }
+}

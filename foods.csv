@@ -1,0 +1,362 @@
+name,aliases,kcal_per_100g
+"Rice, cooked",rice|white rice|boiled rice|steamed rice|plain rice|cooked jasmine rice|cooked rice|cooked white rice,130
+"Rice, brown, cooked",brown rice|wholegrain rice|whole grain rice|cooked brown rice|steamed brown rice|brown rice cooked,112
+"Rice, sticky, cooked",sticky rice|glutinous rice|sweet rice|cooked sticky rice|sticky white rice|glutinous white rice,170
+"Rice, uncooked",uncooked rice|raw rice|dry white rice|rice grains|dried rice,365
+"Rice, wild, cooked",wild rice|cooked wild rice|wild rice cooked|boiled wild rice,101
+"Rice, black, cooked",black rice|forbidden rice|cooked black rice|purple black rice,145
+"Rice, red, cooked",red rice|cooked red rice|red grain rice|boiled red rice,120
+"Rice, parboiled, cooked",parboiled rice|converted rice|cooked parboiled rice|parboiled white rice,123
+"Millet, cooked",millet|cooked millet|boiled millet|millet porridge thick|yellow millet cooked,119
+"Buckwheat, cooked",buckwheat|cooked buckwheat|boiled buckwheat groats|buckwheat groats|kasha plain,92
+"Barley, cooked",barley|pearl barley|cooked barley|boiled pearl barley|pearled barley cooked,123
+"Quinoa, cooked",quinoa|cooked quinoa|boiled quinoa|white quinoa cooked,120
+"Oats, cooked",oatmeal|oat porridge|cooked oats|plain oatmeal|porridge oats cooked,71
+"Oats, dry",dry oats|rolled oats dry|uncooked oats|oat flakes|dry oatmeal,389
+"Corn, boiled",corn|sweet corn|boiled corn|corn kernels|cooked sweetcorn|corn on cob,96
+"Corn grits, cooked",corn grits|grits|cooked grits|maize porridge|plain corn grits,70
+"Polenta, cooked",polenta|cooked polenta|boiled cornmeal|cornmeal porridge,70
+"Bulgur, cooked",bulgur|bulgur wheat|cooked bulgur|boiled bulgur wheat,83
+"Couscous, cooked",couscous|cooked couscous|plain couscous|steamed couscous,112
+"Wheat berries, cooked",wheat berries|boiled whole wheat|cooked wheat grain|whole wheat kernels cooked,111
+"Sorghum, cooked",sorghum|cooked sorghum|sorghum grain cooked|boiled sorghum,120
+"Amaranth, cooked",amaranth|cooked amaranth|amaranth grain cooked|boiled amaranth,102
+"Job's tears, cooked",job's tears|coix seed|adlay|cooked adlay|cooked coix barley|yi yi ren cooked,110
+"Semolina porridge, cooked",semolina porridge|cooked semolina|cream of wheat cooked|wheat semolina porridge,85
+"Tapioca pearls, cooked",tapioca pearls|cooked tapioca|sago pearls cooked|boiled tapioca pearls|plain tapioca balls,131
+"Pasta, cooked",pasta|plain pasta|spaghetti|penne|macaroni|fusilli|cooked pasta|boiled pasta,157
+"Pasta, wholewheat, cooked",whole wheat pasta|wholemeal pasta|wholegrain pasta|cooked wholewheat pasta|brown pasta,149
+"Pasta, egg, cooked",egg pasta|cooked egg pasta|fresh egg pasta|egg tagliatelle|egg fettuccine,138
+"Pasta, dry",dry pasta|uncooked pasta|raw spaghetti|dry penne|dried macaroni,371
+"Wheat noodles, cooked",wheat noodles|plain wheat noodles|cooked wheat noodles|boiled wheat noodles|Chinese wheat noodles|hand pulled noodles,138
+"Egg noodles, cooked",egg noodles|cooked egg noodles|Chinese egg noodles|yellow egg noodles|boiled egg noodles,138
+"Rice noodles, cooked",rice noodles|rice vermicelli|cooked rice noodle|rice sticks cooked|flat rice noodles plain|ho fun plain|mai fun plain,110
+"Rice noodles, dry",dry rice noodles|uncooked rice noodles|dried rice vermicelli|dry rice sticks|rice noodle dry,364
+"Udon noodles, cooked",udon|udon noodles|cooked udon|thick Japanese noodles|plain udon,127
+"Soba noodles, cooked",soba|soba noodles|cooked soba|buckwheat noodle cooked|plain soba,99
+"Glass noodles, cooked",glass noodles|cellophane noodles|bean thread noodles|cooked vermicelli glass|mung bean glass noodles|transparent noodles,85
+"Sweet potato noodles, cooked",sweet potato noodles|sweet potato starch noodles|korean glass noodles|dangmyeon cooked|sweet potato vermicelli,90
+"Konjac noodles, cooked",konjac noodles|shirataki noodles|konnyaku noodles|zero calorie noodles|cooked shirataki,6
+"Instant noodles, prepared",instant noodles|cooked instant ramen|prepared instant noodles|packet noodles cooked|fried instant noodles prepared,185
+"Ramen noodles, plain, cooked",ramen noodles plain|fresh ramen noodles|boiled ramen noodles|ramen noodle only|cooked ramen wheat noodles,137
+"Wheat noodles, dry",dry wheat noodles|uncooked wheat noodles|dried wheat noodle|dry hand pulled noodles,370
+"Egg noodles, dry",dry egg noodles|dried egg noodles|uncooked egg noodles|dry yellow noodles,380
+"Glass noodles, dry",dry glass noodles|dried cellophane noodles|uncooked bean thread noodles|dry mung bean noodles,351
+"Rice cake, plain, cooked",rice cake|rice cakes sliced|cooked rice cake|nian gao plain|rice cake slices|tteok plain,180
+"Glutinous rice cake, cooked",glutinous rice cake|sticky rice cake|cooked glutinous rice cake|plain sticky rice slices,210
+"Mochi, plain",mochi|plain mochi|rice mochi|unsweetened mochi|Japanese rice cake plain,235
+"Wonton wrapper, uncooked",wonton wrapper|wonton skin|wonton pastry|raw wonton sheet|Chinese wonton wrapper,290
+"Dumpling wrapper, uncooked",dumpling wrapper|dumpling skin|jiaozi wrapper|raw dumpling dough sheet|gyoza skin,285
+"Rice paper, dried",dry rice paper|rice paper sheets|Vietnamese rice paper|spring roll rice sheet dry|rice paper wrapper dry,330
+"Rice paper, hydrated",wet rice paper|rehydrated rice paper|soft rice paper wrapper|soaked rice paper|moistened rice paper,100
+"Bread, white",bread|white bread|plain bread|sliced bread|white toast bread|sandwich bread,265
+"Bread, wholemeal",wholemeal bread|whole wheat bread|wholegrain bread|brown bread wholegrain|whole wheat toast,247
+"Bread, sourdough",sourdough bread|sourdough|fermented wheat bread|sourdough slice,250
+"Bread, rye",rye bread|dark rye bread|rye loaf|rye bread slice,259
+"Bread, multigrain",multigrain bread|mixed grain bread|seeded multigrain bread|mixed grain toast,260
+"Bread, baguette",baguette|French bread|French baguette|baguette bread|crusty French loaf,274
+"Bread roll, plain",bread roll|dinner roll|white bread roll|soft roll|plain bread bun|bread bun,270
+"Bagel, plain",bagel|plain bagel|boiled bagel|bagel bread,270
+"Flatbread, plain",plain flatbread|unleavened flatbread|wheat flatbread|thin bread,275
+"Naan, plain",naan|plain naan|naan bread|baked Indian flatbread|tandoor naan,290
+"Roti, plain",roti|plain roti|chapati|plain chapati|whole wheat roti,297
+"Tortilla, wheat",flour tortilla|wheat tortilla|soft wheat wrap|plain flour wrap|wheat wrap bread,312
+"Tortilla, corn",corn tortilla|maize tortilla|soft corn tortilla|plain maize wrap,218
+"Steamed bun, plain",steamed bun|mantou|plain bao bun|plain steamed bread|Chinese steamed bun|bao bread,225
+Milk bread,sweet soft bread|Hong Kong milk bread|Japanese milk bread|shokupan sweet,300
+"Bread, toasted",toast|toasted bread|plain toast|toasted white bread|bread toast,275
+Pita bread,pita|pitta bread|pocket bread|Middle Eastern flatbread,275
+Central Asian flatbread,non bread|lepeshka|tandyr nan|Kazakh flatbread|Central Asian naan|tandoor bread round,270
+"Baursak, fried bread",baursak|boorsok|fried Kazakh dough|fried bread pieces|Kazakh fried bread,370
+"Croissant, plain",croissant|butter croissant|plain croissant|French crescent pastry,406
+"Puff pastry, baked",puff pastry|baked puff pastry|flaky pastry|butter puff pastry|pastry puff,558
+"Shortcrust pastry, baked",shortcrust pastry|pie crust|baked pastry crust|short pastry|plain tart shell,470
+"Wheat flour, dry",wheat flour|plain flour|all purpose flour|white wheat flour|raw wheat flour,364
+"Corn starch, dry",corn starch|cornflour starch|corn starch powder|maize starch|cornstarch,381
+"Rice flour, dry",rice flour|ground rice flour|rice powder|raw rice flour|white rice flour,366
+"Potato, cooked",potato|boiled potato|cooked potato|steamed potato|plain potato|peeled potato cooked,87
+"Potato, baked",baked potato|jacket potato|oven baked potato|roasted potato no oil|baked russet potato,93
+"Potato, fried",fried potato|French fries|fries|chips fried|deep fried potato|potato fries|chips|french fry,312
+"Potato, mashed",mashed potato|potato mash|mashed potatoes with milk|creamy mashed potato|mash potato,110
+"Sweet potato, cooked",sweet potato|boiled sweet potato|steamed sweet potato|cooked sweet potato|orange sweet potato|purple sweet potato|purple sweet potato cooked,86
+"Sweet potato, roasted",roasted sweet potato|baked sweet potato|oven sweet potato|roast yam sweet potato,105
+"Sweet potato, fried",fried sweet potato|sweet potato fries|deep fried sweet potato|fried yam sticks,250
+"Yam, cooked",yam|boiled yam|steamed yam|cooked yam tuber|white yam,116
+"Taro, cooked",taro|steamed taro|boiled taro|cooked taro root|taro root cooked,142
+"Cassava, cooked",cassava|boiled cassava|cooked yuca|yuca root boiled|manioc cooked,112
+"Lotus root, cooked",lotus root|cooked lotus root|boiled lotus root|steamed lotus root|lotus rhizome,74
+"Carrot, raw",raw carrot|fresh carrot|carrot sticks|carrot crudités|carrot crudites|uncooked carrot,41
+"Carrot, cooked",boiled carrot|steamed carrot|cooked carrot|carrots cooked|stir-fried carrot|stir fried carrot,35
+"Beetroot, cooked",beetroot|cooked beet|boiled beetroot|red beet cooked|beets boiled,44
+"Radish, raw",raw radish|fresh radish|radish sticks|radish crudités|radish crudites|uncooked radish,16
+"Radish, cooked",cooked radish|daikon|white radish|Chinese radish|cooked daikon|boiled white radish|stir-fried radish,18
+"Turnip, cooked",turnip|cooked turnip|boiled turnip|white turnip cooked,22
+"Parsnip, cooked",parsnip|boiled parsnip|cooked parsnip|roasted parsnip no oil,71
+"Pumpkin, cooked",pumpkin|cooked pumpkin|steamed pumpkin|boiled pumpkin|Chinese pumpkin cooked,34
+"Butternut squash, cooked",butternut squash|cooked butternut|boiled butternut squash|steamed butternut,40
+"Winter squash, cooked",winter squash|cooked winter squash|baked squash plain|cooked squash,45
+"Bamboo shoots, cooked",bamboo shoots|cooked bamboo|boiled bamboo shoots|bamboo shoot slices,27
+"Water chestnuts, cooked",water chestnuts|Chinese water chestnut|boiled water chestnut|cooked water chestnuts,97
+"Burdock root, cooked",burdock|burdock root|gobo root|cooked burdock|boiled gobo,72
+"Arrowroot, cooked",arrowroot|arrowroot root|cooked arrowroot|boiled arrowroot tuber,65
+"Jicama, raw",jicama|yam bean|raw jicama|Mexican turnip raw|fresh jicama,38
+"Lotus seeds, cooked",lotus seeds|cooked lotus seeds|boiled lotus seeds|lotus kernels|cooked lotus nuts,89
+"Broccoli, cooked",broccoli|steamed broccoli|boiled broccoli|cooked broccoli|broccoli florets,35
+"Cauliflower, cooked",cauliflower|steamed cauliflower|boiled cauliflower|cooked cauliflower,23
+"Cabbage, cooked",cabbage|cooked cabbage|boiled cabbage|steamed green cabbage|green cabbage cooked,23
+"Chinese cabbage, cooked",Chinese cabbage|napa cabbage|Chinese leaf cabbage|cooked napa cabbage|wombok cooked,13
+"Pak choi, cooked",pak choi|bok choy|pak choy|cooked bok choy|Chinese bok choy|steamed pak choi,12
+"Choy sum, cooked",choy sum|cooked choy sum|Chinese flowering cabbage|choi sum|steamed choy sum,22
+"Gai lan, cooked",gai lan|Chinese broccoli|kai lan|cooked Chinese kale|steamed gai lan,26
+"Spinach, cooked",spinach|cooked spinach|boiled spinach|steamed spinach|spinach greens cooked,23
+"Water spinach, cooked",water spinach|morning glory greens|ong choy|kangkong|cooked water spinach,22
+"Mustard greens, cooked",mustard greens|Chinese mustard greens|cooked mustard leaves|mustard leaf vegetables,24
+"Lettuce, raw",lettuce|salad lettuce|raw lettuce|leaf lettuce|fresh lettuce,15
+"Cucumber, raw",cucumber|fresh cucumber|raw cucumber|cucumber slices|peeled cucumber,15
+"Tomato, raw",tomato|fresh tomato|raw tomato|tomato slices|cherry tomato|tomato crudités|tomato crudites,18
+"Tomato, cooked",cooked tomato|stir-fried tomato|stir fried tomato|tomato cooked|braised tomato,18
+"Bell pepper, raw",raw bell pepper|raw capsicum|fresh bell pepper|fresh capsicum|raw sweet pepper|bell pepper raw|capsicum raw,26
+"Bell pepper, cooked",cooked bell pepper|stir-fried bell pepper|stir fried bell pepper|cooked capsicum|stir-fried capsicum|cooked sweet pepper|bell pepper cooked|capsicum cooked,30
+"Eggplant, cooked",eggplant|aubergine|cooked eggplant|steamed eggplant|boiled aubergine,35
+"Eggplant, fried",fried eggplant|fried aubergine|oil cooked eggplant|pan fried eggplant|deep fried aubergine,160
+"Zucchini, cooked",zucchini|courgette|cooked zucchini|cooked courgette|steamed zucchini,20
+"Green beans, cooked",green beans|string beans|cooked green beans|French beans|boiled green beans,35
+"Peas, cooked",peas|green peas|cooked peas|garden peas|boiled green peas,84
+"Mushrooms, cooked",mushroom|mushrooms|mixed mushroom|cooked mushrooms|plain mushroom,28
+"Shiitake mushrooms, cooked",shiitake|shiitake mushroom|cooked shiitake|Chinese black mushroom|fresh shiitake cooked,56
+"Oyster mushrooms, cooked",oyster mushroom|oyster mushrooms|cooked oyster mushroom|pleurotus mushroom,33
+"Enoki mushrooms, cooked",enoki|enoki mushroom|golden needle mushroom|cooked enoki|enokitake cooked,37
+"Wood ear mushrooms, cooked",wood ear|wood ear mushroom|black fungus|cooked black fungus|cloud ear mushroom,25
+"Bean sprouts, cooked",bean sprouts|mung bean sprouts|cooked bean sprouts|boiled sprouts|fried sprouts plain,30
+Apple,fresh apple|raw apple|red apple|green apple|apple slices,52
+Banana,ripe banana|fresh banana|yellow banana|banana fruit,89
+Orange,fresh orange|sweet orange|orange segments|peeled orange,47
+Mandarin,tangerine|mandarin orange|clementine|satsuma,53
+Pear,European pear|fresh pear|ripe pear|pear fruit,57
+Asian pear,nashi pear|Chinese pear|Korean pear|snow pear|apple pear,42
+Peach,fresh peach|yellow peach|white peach|ripe peach,39
+Nectarine,fresh nectarine|yellow nectarine|ripe nectarine,44
+Plum,fresh plum|red plum|black plum|plum fruit,46
+Apricot,fresh apricot|ripe apricot|yellow apricot,48
+Grapes,fresh grapes|table grapes|green grapes|red grapes,69
+Mango,fresh mango|ripe mango|mango flesh|yellow mango,60
+Papaya,ripe papaya|pawpaw fruit|fresh papaya|papaya flesh,43
+Pineapple,fresh pineapple|pineapple pieces|pineapple chunks|pineapple flesh,50
+Watermelon,fresh watermelon|watermelon flesh|watermelon slices|red watermelon,30
+Cantaloupe,muskmelon|rockmelon|orange melon|cantaloupe melon,34
+Honeydew melon,honeydew|green melon|fresh honeydew|honey melon,36
+Strawberries,strawberry|fresh strawberry|fresh strawberries|red strawberries,32
+Blueberries,blueberry|fresh blueberries|fresh blueberry,57
+Kiwi fruit,kiwi|kiwifruit|green kiwi|fresh kiwi,61
+Dragon fruit,pitaya|pitahaya|red dragon fruit|white dragon fruit,60
+Lychee,litchi|fresh lychee|lychee fruit|peeled lychee,66
+Longan,fresh longan|longan fruit|dragon eye fruit|peeled longan,60
+Durian,fresh durian|durian flesh|ripe durian|durian fruit,147
+"Dates, dried",dates|dried dates|date fruit dried|sweet dates|pitted dates,282
+"Meat, unspecified, cooked",meat|cooked meat|mixed meat|unidentified meat|unknown meat|generic meat,250
+"Beef, cooked",beef|cooked beef|beef meat|plain beef|red meat beef,250
+"Beef, lean, cooked",lean beef|lean cooked beef|beef trimmed fat|lean beef meat|low fat beef,217
+"Beef brisket, cooked",beef brisket|brisket|braised beef brisket|cooked brisket|stewed brisket,290
+"Beef steak, cooked",beef steak|steak|grilled beef steak|pan seared steak|cooked beef steak,271
+"Beef mince, cooked",beef mince|ground beef|minced beef|cooked ground beef|beef ground meat,250
+"Beef, fatty, cooked",fatty beef|marbled beef|high fat beef|cooked fatty beef|fatty beef slices,310
+"Beef ribs, cooked",beef ribs|braised beef ribs|short ribs beef|cooked beef rib meat|beef rib meat,330
+"Beef liver, cooked",beef liver|cooked beef liver|ox liver|fried beef liver plain|bovine liver,175
+"Beef tongue, cooked",beef tongue|ox tongue|cooked ox tongue|braised beef tongue|boiled beef tongue,284
+"Pork, cooked",pork|cooked pork|plain pork|pork meat,242
+"Pork loin, cooked",pork loin|lean pork loin|cooked pork loin|grilled pork loin|pork fillet,196
+"Pork belly, cooked",pork belly|cooked pork belly|fatty pork belly|braised pork belly|roasted pork belly|belly pork,518
+"Pork shoulder, cooked",pork shoulder|cooked pork shoulder|braised pork shoulder|pork shoulder meat,270
+"Pork mince, cooked",pork mince|ground pork|minced pork|cooked ground pork|pork minced meat,260
+"Pork ribs, cooked",pork ribs|pork spare ribs|spare ribs pork|braised pork ribs|cooked pork rib meat,320
+"Pork liver, cooked",pork liver|pig liver|cooked pork liver|boiled pig liver|fried pig liver plain,165
+"Pork skin, cooked",pork skin|pork rind cooked|pig skin|cooked pork skin|roast pork skin,540
+"Lamb, cooked",lamb|cooked lamb|lamb meat|roast lamb meat|grilled lamb meat,294
+"Lamb, lean, cooked",lean lamb|lean cooked lamb|trimmed lamb meat|low fat lamb,206
+"Mutton, cooked",mutton|cooked mutton|sheep meat|cooked sheep meat|boiled mutton,270
+"Lamb ribs, cooked",lamb ribs|mutton ribs|lamb rib meat|grilled lamb ribs|cooked lamb ribs,330
+"Horse meat, cooked",horse meat|cooked horse meat|boiled horse meat|Kazakh horse meat|horse beef,175
+"Horse sausage, cooked",kazy sausage|horse sausage|Kazakh kazy|qazy|cooked horse sausage|kazy,380
+"Goat meat, cooked",goat meat|cooked goat|boiled goat meat|goat curry meat plain,143
+"Chicken, cooked",chicken|cooked chicken|chicken meat|plain chicken,215
+"Sausage, cooked",sausage|cooked sausage|grilled sausage|fried sausage|pork sausage|beef sausage|meat sausage,300
+"Chicken breast, cooked",chicken breast|skinless chicken breast|grilled chicken breast|boiled chicken breast|cooked chicken breast,165
+"Chicken thigh, cooked",chicken thigh|chicken leg meat|cooked chicken thigh|roasted chicken thigh|deboned chicken thigh,209
+"Chicken wing, cooked",chicken wing|chicken wings|roasted chicken wings|cooked chicken wing|wing meat chicken,260
+"Chicken skin, cooked",chicken skin|cooked chicken skin|roasted chicken skin|fried chicken skin,450
+"Chicken, fried",fried chicken|deep fried chicken|crispy fried chicken|breaded fried chicken|fried chicken pieces,270
+"Chicken, roasted",roast chicken|roasted chicken|rotisserie chicken|oven roasted chicken|whole roast chicken,239
+"Chicken, boiled",boiled chicken|poached chicken|steamed chicken|white cut chicken|chicken cooked in water,190
+"Chicken liver, cooked",chicken liver|cooked chicken liver|fried chicken liver plain|boiled chicken liver,167
+"Chicken gizzard, cooked",chicken gizzard|chicken stomach|cooked chicken gizzard|boiled chicken gizzard,154
+"Duck, cooked",duck|cooked duck|duck meat|plain duck meat,280
+"Duck breast, cooked",duck breast|cooked duck breast|grilled duck breast|skinless duck breast,200
+"Duck, roasted",roast duck|roasted duck|Peking duck meat|Chinese roast duck|duck roasted with skin,330
+"Duck leg, cooked",duck leg|cooked duck leg|duck thigh|roasted duck leg|braised duck leg,310
+"Goose, cooked",goose|goose meat|cooked goose|roasted goose|Chinese roast goose,305
+"Turkey, cooked",turkey|cooked turkey|turkey meat|roast turkey|turkey flesh,189
+"Turkey breast, cooked",turkey breast|roasted turkey breast|skinless turkey breast|cooked turkey breast,135
+"Quail, cooked",quail|quail meat|roasted quail|cooked quail|whole quail cooked,227
+"Egg, boiled",egg|boiled egg|hard boiled egg|soft boiled egg|cooked chicken egg|whole egg cooked,155
+"Egg, fried",fried egg|pan fried egg|sunny side up egg|over easy egg|fried chicken egg|pan-fried egg,196
+"Egg, scrambled",scrambled egg|scrambled eggs|cooked scrambled eggs|plain scrambled eggs,149
+"Egg, poached",poached egg|poached eggs|egg poached in water|water poached egg,143
+"Duck egg, cooked",duck egg|boiled duck egg|cooked duck egg|whole duck egg,185
+"Quail egg, cooked",quail egg|quail eggs|boiled quail egg|cooked quail egg,158
+"Egg white, cooked",egg white|egg whites|cooked egg white|boiled egg white|white of egg,52
+"Fish, cooked",fish|cooked fish|white fish|plain fish|fish fillet cooked|steamed fish plain,140
+"Fish, fried",fried fish|deep fried fish|battered fish|crispy fish|pan fried fish with oil,220
+"Salmon, cooked",salmon|cooked salmon|grilled salmon|baked salmon|salmon fillet cooked,206
+"Salmon, raw",raw salmon|sashimi salmon|salmon sashimi|sushi salmon topping|uncooked salmon|raw salmon fillet,208
+"Tuna, cooked",tuna|cooked tuna|grilled tuna|seared tuna cooked|tuna fish cooked,132
+"Tuna, raw",raw tuna|tuna sashimi|sashimi tuna|sushi tuna topping|uncooked tuna,109
+"Cod, cooked",cod|cod fish|cooked cod|steamed cod|cod fillet cooked,105
+"Tilapia, cooked",tilapia|cooked tilapia|tilapia fillet|steamed tilapia|grilled tilapia,128
+"Carp, cooked",carp|common carp|cooked carp|boiled carp|carp fish cooked,162
+"Grass carp, cooked",grass carp|cooked grass carp|Chinese grass carp|steamed grass carp,127
+"Sea bass, cooked",sea bass|seabass|cooked sea bass|steamed seabass|grilled sea bass,124
+"Mackerel, cooked",mackerel|cooked mackerel|grilled mackerel|baked mackerel|mackerel fish,262
+"Sardines, cooked",sardines|cooked sardine|grilled sardines|sardines fish,208
+"Eel, cooked",eel|cooked eel|grilled eel|unagi eel meat|roast eel,236
+"Prawns, cooked",prawn|prawns|shrimp|cooked shrimp|boiled prawns|steamed shrimp|peeled shrimp,99
+"Shrimp, dried",dried shrimp|small dried prawns|dried tiny shrimp|dehydrated shrimp,290
+"Crab meat, cooked",crab|crab meat|cooked crab|steamed crab meat|crab flesh,97
+"Scallops, cooked",scallop|scallops|cooked scallops|seared scallop|boiled scallop,111
+"Squid, cooked",squid|calamari|cooked squid|boiled squid|plain squid rings,92
+"Octopus, cooked",octopus|cooked octopus|boiled octopus|grilled octopus,164
+"Clams, cooked",clam|clams|cooked clams|boiled clams|clam meat,148
+"Mussels, cooked",mussel|mussels|cooked mussels|boiled mussel meat|steamed mussels,172
+"Oysters, cooked",oyster|oysters|cooked oyster|steamed oysters|oyster meat,81
+"Fish balls, cooked",fish ball|fish balls|cooked fish balls|Asian fish ball|boiled fish balls|seafood balls|fishball,110
+"Crab sticks, surimi",crab stick|crab sticks|surimi stick|imitation crab|seafood stick,95
+"Tofu, firm",tofu|firm tofu|bean curd|soy bean curd|regular tofu|plain firm tofu,144
+"Tofu, soft",soft tofu|soft bean curd|soft soybean curd|tender tofu|soft white tofu,61
+"Tofu, silken",silken tofu|silken bean curd|Japanese silken tofu|very soft tofu|smooth tofu,55
+"Tofu, fried",fried tofu|deep fried tofu|crispy tofu|golden fried tofu|pan fried tofu,270
+"Tofu, dried",dried tofu|pressed tofu|dry bean curd|five spice tofu plain|dougan|tofu pressed,200
+"Tofu skin, cooked",tofu skin|soybean skin|bean curd skin|yuba cooked|fresh tofu sheet|fu pei,190
+"Tofu skin, fried",fried tofu skin|fried bean curd skin|deep fried yuba|crispy tofu sheet,380
+Tofu puffs,tofu puff|fried tofu puff|fried bean curd puff|tofu pocket,275
+"Tofu, fermented",fermented tofu|fermented bean curd|preserved tofu|red fermented tofu|furu,170
+"Tempeh, cooked",tempeh|cooked tempeh|fermented soybean cake|fried tempeh plain|tempeh slices,193
+"Seitan, cooked",seitan|wheat gluten|cooked wheat gluten|mock meat wheat gluten|vegetarian gluten,130
+"Soybeans, cooked",soybean|soybeans|cooked soybeans|boiled soybeans|yellow soybeans cooked,172
+"Black soybeans, cooked",black soybean|black soybeans|cooked black soy beans|black soya beans,173
+"Edamame, cooked",edamame|green soybeans|boiled edamame|young soy beans|steamed edamame,121
+"Chickpeas, cooked",chickpeas|chickpea|garbanzo beans|cooked chickpeas|boiled garbanzo,164
+"Lentils, cooked",lentils|lentil|cooked lentils|boiled lentils|brown lentils cooked,116
+"Kidney beans, cooked",kidney beans|red kidney beans|cooked kidney bean|boiled kidney beans,127
+"Black beans, cooked",black beans|cooked black beans|boiled black beans|black turtle beans,132
+"White beans, cooked",white beans|cannellini beans|cooked white beans|navy beans cooked|white kidney beans,139
+"Mung beans, cooked",mung beans|mung bean|cooked mung beans|green gram cooked|boiled mung bean,105
+"Red beans, cooked",red beans|adzuki beans|azuki beans|cooked red beans|boiled adzuki,128
+"Split peas, cooked",split peas|yellow split peas|green split peas cooked|cooked split peas,118
+"Broad beans, cooked",broad beans|fava beans|cooked fava|boiled broad beans,110
+"Peanuts, boiled",boiled peanuts|cooked peanuts in shell|wet peanuts|boiled groundnuts,318
+Hummus,houmous|chickpea spread|plain hummus|chickpea dip,166
+"Milk, whole",milk|whole milk|full fat milk|cow milk|full cream milk|regular dairy milk,61
+"Milk, reduced fat",low fat milk|semi skimmed milk|reduced fat milk|two percent milk|2 percent milk,47
+"Milk, skimmed",skim milk|skimmed milk|fat free milk|nonfat milk|zero fat milk,35
+"Soy milk, unsweetened",soy milk|soya milk|unsweetened soy milk|plain soybean milk|no sugar soy milk,33
+"Soy milk, sweetened",sweetened soy milk|sweet soy milk|sugar soy milk|sweet soya milk|sweet soybean drink,55
+"Yogurt, plain",yogurt|plain yogurt|natural yogurt|plain yoghurt|unsweetened yoghurt,61
+"Yogurt, Greek",Greek yogurt|Greek yoghurt|strained yogurt|plain Greek yogurt|Greek style yoghurt,97
+"Yogurt, sweetened",sweetened yogurt|flavoured yogurt|fruit yogurt|sugar added yoghurt,105
+"Cheese, generic",cheese|hard cheese|regular cheese|melted cheese|yellow cheese,350
+Cottage cheese,low fat cottage cheese|fresh curd cheese|curd cheese,98
+Cream cheese,soft cream cheese|Philadelphia style cheese|spreadable cheese,342
+Paneer,Indian cottage cheese|pressed paneer|paneer cheese|fresh paneer,265
+Butter,dairy butter|salted butter|unsalted butter|butter spread dairy,717
+Ghee,clarified butter|butter ghee|Indian ghee|rendered butter,900
+"Oil, vegetable",oil|cooking oil|vegetable oil|frying oil|neutral cooking oil|vegetable cooking fat,884
+"Oil, olive",olive oil|extra virgin olive oil|virgin olive oil|light olive oil,884
+"Oil, sesame",sesame oil|toasted sesame oil|sesame seed oil|Asian sesame oil,884
+Lard,pork fat|rendered pork fat|pig fat|cooking lard,902
+Coconut milk,canned coconut milk|full fat coconut milk|coconut milk cooking,190
+Coconut cream,thick coconut milk|canned coconut cream|rich coconut cream,330
+Coconut flesh,coconut|fresh coconut|raw coconut flesh|coconut meat|grated fresh coconut,354
+Almonds,almond|whole almonds|raw almonds|plain almond nuts,579
+Walnuts,walnut|walnut halves|raw walnuts|plain walnut,654
+Cashews,cashew|cashew nuts|plain cashews|raw cashews,553
+Sesame seeds,sesame|white sesame seeds|black sesame seeds|toasted sesame seeds,573
+"Gravy, meat",gravy|meat gravy|brown gravy|savoury gravy|roast gravy,70
+"Curry sauce, cooked",curry sauce|fish ball curry sauce|fishball curry sauce|curry gravy|yellow curry sauce,120
+"Sweet and sour sauce",sweet and sour sauce|sweet-and-sour sauce|sweet sour sauce,110
+"Jellyfish, prepared",prepared jellyfish|cooked jellyfish|seasoned jellyfish,40
+"Parmesan cheese",parmesan|grated parmesan|parmesan cheese|parmigiano reggiano,431
+Soy sauce,light soy sauce|dark soy sauce|shoyu|soya sauce,53
+Oyster sauce,Chinese oyster sauce|thick oyster sauce|oyster flavoured sauce,51
+Hoisin sauce,hoisin|Chinese barbecue sauce|sweet bean sauce hoisin,220
+"Chilli sauce, sweet",sweet chilli sauce|sweet chili sauce|Thai sweet chilli sauce|sweet hot sauce|chili sauce|chilli sauce,190
+Chilli oil,chili oil|hot chilli oil|Chinese spicy oil|red chilli oil,900
+Chilli paste,chili paste|spicy chilli paste|hot pepper paste|fermented chili paste,120
+Tomato ketchup,ketchup|tomato sauce sweet|red ketchup|ketchup sauce,112
+Tomato paste,concentrated tomato|tomato puree thick|double concentrated tomato,82
+Mayonnaise,mayo|egg mayonnaise|regular mayo|mayonnaise sauce|mayo sauce,680
+Peanut sauce,satay sauce|peanut dressing|spicy peanut sauce|groundnut sauce,350
+Sesame paste,tahini|Chinese sesame paste|ground sesame paste|sesame butter,595
+"Bean paste, sweet",sweet bean paste|red bean paste sweet|sweet adzuki paste|sugared bean paste|an paste,260
+"Bean paste, fermented",fermented bean paste|doubanjiang|broad bean chilli paste|Chinese spicy bean paste|bean sauce fermented,180
+"Sugar, white",sugar|white sugar|granulated sugar|table sugar|refined sugar,387
+"Sugar, brown",brown sugar|light brown sugar|dark brown sugar|soft brown sugar,380
+Honey,raw honey|natural honey|liquid honey|flower honey,304
+"Jam, fruit",jam|fruit jam|fruit preserves|strawberry jam|fruit conserve,250
+"Chocolate, generic",chocolate|plain chocolate|chocolate bar|regular chocolate|eating chocolate,540
+"Chocolate, dark",dark chocolate|black chocolate|bittersweet chocolate|high cocoa chocolate,598
+"Chocolate, milk",milk chocolate|dairy milk chocolate|sweet milk chocolate|milk chocolate bar,535
+Peanut butter,groundnut butter|peanut spread|smooth peanut butter|crunchy peanut butter,588
+"Cream, whipped",whipped cream|whipping cream whipped|cream topping|sweet whipped cream|whipped dairy cream,340
+"Condensed milk, sweetened",condensed milk|sweetened condensed milk|thick sweet milk|canned condensed milk,321
+"Abalone, cooked",abalone|cooked abalone|steamed abalone,105
+"Sea cucumber, cooked",sea cucumber|cooked sea cucumber|braised sea cucumber,30
+"Seaweed, rehydrated",seaweed|rehydrated seaweed|cooked seaweed,45
+"Seaweed, dried",dried seaweed|dry seaweed,290
+"Bacon, cooked",bacon|fried bacon|cooked bacon,540
+"Onion, raw",raw onion|fresh onion|uncooked onion|onion slices raw|sliced raw onion,40
+"Onion, cooked",cooked onion|fried onion|stir-fried onion|stir fried onion|onion cooked|sauteed onion|sautéed onion,44
+"Spring onion, fresh",spring onion|green onion|green onions|scallion|scallions,32
+"Coriander leaves, fresh",coriander|cilantro|coriander leaves|fresh cilantro,23
+"Peanuts, roasted",peanuts|peanut|roasted peanuts|groundnuts,585
+Char siu pork,char siu|char siu pork|barbecue pork|Chinese BBQ pork|bbq pork,270
+"Roast pork, cooked",roast pork|roasted pork|Chinese roast pork,300
+"Noodles, cooked",noodles|cooked noodles|plain noodles,140
+"Dumpling, cooked",dumpling|dumplings|filled dumpling|cooked dumplings|steamed dumplings|siu mai|shumai|steamed shumai|pork siu mai|siu mai dumpling,220
+"Xiaolongbao, steamed",xiaolongbao|soup dumpling|Shanghai soup dumpling|soup dumplings,210
+"Dumpling wrapper, cooked",cooked dumpling wrapper|steamed dumpling wrapper,250
+"Minced meat, cooked",minced meat|ground meat|cooked minced meat|meat filling,250
+"Fish cake, cooked",fish cake|fish cakes|cooked fish cake,120
+"Sea urchin roe, raw",sea urchin|sea urchin roe|uni,120
+"Choux pastry, baked",choux pastry|cream puff shell|baked choux pastry|cream puff|cream puff pastry|puff pastry shell,360
+"Cake, plain",cake|plain cake|sponge cake|strawberry cake|fruit cake|cream cake|corn cake|honey cake|strawberry honey cake,350
+"Candy, assorted",candy|sweets|assorted candy|boiled sweets|hard candy|soft candy,400
+"Beef patty, cooked",beef patty|hamburger patty|burger patty|cooked beef patty,250
+"Chicken patty, cooked",chicken patty|chicken burger patty|fried chicken patty,260
+"Pickles",pickles|pickle|gherkin|gherkins|pickled cucumber,16
+"Mozzarella cheese",mozzarella|mozzarella cheese|fresh mozzarella,280
+"Ham, cooked",ham|cooked ham|sliced ham,145
+"Tomato sauce",tomato sauce|pizza sauce|marinara sauce,30
+"Pizza dough, baked",pizza dough|baked pizza dough|pizza base|pizza crust,270
+"Mixed vegetables, cooked",mixed vegetables|vegetables|green vegetables|cooked vegetables|veg,40
+"Dill, fresh",dill|fresh dill,43
+"Garlic, cooked",garlic|cooked garlic|fried garlic,150
+"Broth, clear",broth|clear broth|soup broth|clear soup,10
+"Parsley, fresh",parsley|fresh parsley,36
+"Ginger, fresh",ginger|fresh ginger,80
+"Celery, cooked",celery|cooked celery|stir-fried celery|celery stalks,16
+"Burger bun",burger bun|sesame seed bun|sesame bun|hamburger bun|seeded bun,280
+"Pierogi, cooked",pierogi|pierogi ruskie|Polish dumpling|cooked pierogi|potato cheese pierogi,200
+"Tzatziki sauce",tzatziki|tzatziki sauce|cucumber yogurt sauce,70
+"Lemon tea, sweetened",lemon tea|Hong Kong lemon tea|sweet lemon tea|iced lemon tea,35
+"Chinese pastry, baked",Chinese pastry|traditional Chinese pastry|Chinese dessert pastry|baked Chinese pastry,420
+"Tofu pudding",tofu pudding|douhua|tofu hua|soft tofu pudding|soybean pudding,60
+"Red cabbage, raw",red cabbage|raw red cabbage|shredded red cabbage,31
+"Flatbread",flatbread|kebab flatbread|lavash|wrap bread|doner bread,275
+"Wheat wrapper, cooked",wheat wrapper|cooked wheat wrapper|crepe wrapper|thin wheat wrapper|cooked pancake wrapper|savoury wrapper|savory wrapper,220
+"Fried cracker, crispy",fried cracker|crispy fried cracker|crispy cracker|jianbing cracker|crispy wonton strip,450
+"Sweet pastry, baked",sweet pastry|baked pastry|sweet baked pastry|plain sweet pastry,380
+"Seafood, mixed, cooked",seafood|mixed seafood|cooked seafood|seafood mix,120
+"Nuts, mixed",mixed nuts|crushed nuts|chopped nuts|assorted nuts,600
+"Lemon, fresh",lemon|fresh lemon|lemon wedge|lemon slice,29
+"Mushroom, dried, rehydrated",dried mushrooms|rehydrated dried mushrooms|dried shiitake rehydrated,35
+"Cream sauce",cream sauce|creamy pasta sauce|creamy sauce|Alfredo-style sauce|white cream sauce|pasta cream sauce,180
+"Salad dressing",salad dressing|vinaigrette|Italian dressing|French dressing|oil vinegar dressing,150
