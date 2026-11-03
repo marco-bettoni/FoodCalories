@@ -34,7 +34,10 @@ docs/archive/
 samples_archive/
 report_*.txt
 REPORT.txt
-scripts/
+
+# Keep student-facing helpers tracked; ignore other local scripts
+scripts/*
+!scripts/check_system.sh
 
 # Streamlit
 .streamlit/secrets.toml
