@@ -1,5 +1,9 @@
 """Tests for vision validation and demo mode (no live Ollama required)."""
 
+import urllib.error
+from types import SimpleNamespace
+from unittest.mock import MagicMock, patch
+
 import pytest
 
 import config
@@ -519,3 +523,120 @@ def test_curry_fish_balls_keeps_separate_sauce():
     assert "curry sauce" in names
     sauce = next(item for item in result["ingredients"] if "curry" in item["name"].lower())
     assert float(sauce["grams"]) == 80.0
+
+
+def test_check_ollama_available_success():
+    response = MagicMock()
+    response.status = 200
+    response.__enter__.return_value = response
+    response.__exit__.return_value = False
+
+    with patch("vision.urllib.request.urlopen", return_value=response) as urlopen:
+        ok, message = vision.check_ollama_available(host="http://example.test:11434")
+
+    assert ok is True
+    assert "reachable" in message.lower()
+    urlopen.assert_called_once()
+    assert urlopen.call_args.args[0] == "http://example.test:11434/api/tags"
+
+
+def test_check_ollama_available_connection_error():
+    with patch(
+        "vision.urllib.request.urlopen",
+        side_effect=urllib.error.URLError("Connection refused"),
+    ):
+        ok, message = vision.check_ollama_available(host="http://127.0.0.1:9")
+
+    assert ok is False
+    assert "Cannot reach Ollama" in message
+    assert "Connection refused" in message
+
+
+def test_check_ollama_available_timeout():
+    with patch(
+        "vision.urllib.request.urlopen",
+        side_effect=urllib.error.URLError(TimeoutError("timed out")),
+    ):
+        ok, message = vision.check_ollama_available(host="http://127.0.0.1:11434")
+
+    assert ok is False
+    assert "Cannot reach Ollama" in message
+
+
+def test_call_ollama_vision_parses_json_string(monkeypatch):
+    fake_response = SimpleNamespace(
+        message=SimpleNamespace(content='{"dish_name":"Apple","ingredients":[{"name":"apple","grams":180}]}')
+    )
+    fake_client = MagicMock()
+    fake_client.chat.return_value = fake_response
+
+    monkeypatch.setattr(vision, "Client", MagicMock(return_value=fake_client))
+    monkeypatch.setattr(vision, "_prepare_image_bytes", lambda data, max_side=None: data)
+
+    result = vision._call_ollama_vision(b"fake-image", "describe food")
+
+    assert result["dish_name"] == "Apple"
+    assert result["ingredients"][0]["name"] == "apple"
+    fake_client.chat.assert_called_once()
+    kwargs = fake_client.chat.call_args.kwargs
+    assert kwargs["model"] == config.OLLAMA_MODEL
+    assert kwargs["format"] == "json"
+    assert kwargs["stream"] is False
+    assert kwargs["messages"][0]["role"] == "user"
+    assert kwargs["messages"][0]["images"] == [b"fake-image"]
+    assert kwargs["options"]["temperature"] == config.OLLAMA_TEMPERATURE
+    assert kwargs["options"]["num_ctx"] == config.OLLAMA_NUM_CTX
+
+
+def test_call_ollama_vision_accepts_dict_content(monkeypatch):
+    fake_response = SimpleNamespace(
+        message=SimpleNamespace(
+            content={
+                "dish_name": "Banana",
+                "ingredients": [{"name": "banana", "grams": 120}],
+            }
+        )
+    )
+    fake_client = MagicMock()
+    fake_client.chat.return_value = fake_response
+    monkeypatch.setattr(vision, "Client", MagicMock(return_value=fake_client))
+    monkeypatch.setattr(vision, "_prepare_image_bytes", lambda data, max_side=None: data)
+
+    result = vision._call_ollama_vision(b"img", "prompt")
+    assert result["dish_name"] == "Banana"
+
+
+def test_call_ollama_vision_empty_response_raises(monkeypatch):
+    fake_response = SimpleNamespace(message=SimpleNamespace(content=""))
+    fake_client = MagicMock()
+    fake_client.chat.return_value = fake_response
+    monkeypatch.setattr(vision, "Client", MagicMock(return_value=fake_client))
+    monkeypatch.setattr(vision, "_prepare_image_bytes", lambda data, max_side=None: data)
+
+    with pytest.raises(ValueError, match="empty response"):
+        vision._call_ollama_vision(b"img", "prompt")
+
+
+def test_call_ollama_vision_malformed_json_raises(monkeypatch):
+    fake_response = SimpleNamespace(message=SimpleNamespace(content="not-json {{{"))
+    fake_client = MagicMock()
+    fake_client.chat.return_value = fake_response
+    monkeypatch.setattr(vision, "Client", MagicMock(return_value=fake_client))
+    monkeypatch.setattr(vision, "_prepare_image_bytes", lambda data, max_side=None: data)
+
+    with pytest.raises(ValueError):
+        vision._call_ollama_vision(b"img", "prompt")
+
+
+def test_call_ollama_vision_invalid_schema_raises(monkeypatch):
+    # Syntactically valid JSON that fails MealAnalysis validation.
+    fake_response = SimpleNamespace(
+        message=SimpleNamespace(content='{"ingredients":[{"name":"","grams":-5}]}')
+    )
+    fake_client = MagicMock()
+    fake_client.chat.return_value = fake_response
+    monkeypatch.setattr(vision, "Client", MagicMock(return_value=fake_client))
+    monkeypatch.setattr(vision, "_prepare_image_bytes", lambda data, max_side=None: data)
+
+    with pytest.raises(ValueError, match="Invalid model output"):
+        vision._call_ollama_vision(b"img", "prompt")

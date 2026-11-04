@@ -10,8 +10,11 @@ An optional ai_calorie_estimate field is for educational comparison only.
 from __future__ import annotations
 
 import json
+import urllib.error
+import urllib.request
 from typing import Any, Literal
 
+from ollama import Client
 from pydantic import BaseModel, Field, ValidationError, field_validator
 
 import cache
@@ -1376,13 +1379,25 @@ def _extract_json_object(text: str) -> Any:
 
 def check_ollama_available(host: str | None = None) -> tuple[bool, str]:
     """
-    Check whether the Ollama HTTP service responds.
+    Check whether the Ollama HTTP service is reachable.
 
-    Returns (ok, message).
+    This probes ``GET {host}/api/tags``. It does **not** check whether the
+    configured vision model is installed — use ``model_is_installed()`` for that.
+
+    Args:
+        host: Optional Ollama base URL. When omitted, uses ``config.OLLAMA_HOST``
+            (already normalised, e.g. ``http://localhost:11434``).
+
+    Returns:
+        ``(True, message)`` when the service answers HTTP 200.
+        ``(False, message)`` when the host is unreachable, times out, or
+        returns a non-200 status. The message is safe to show to beginners.
+
+    Expected failures:
+        - Ollama not running → connection refused / URL error
+        - Wrong host or port → connection error or timeout (5 seconds)
+        - HTTP error from the service → non-200 status message
     """
-    import urllib.error
-    import urllib.request
-
     base = (host or config.OLLAMA_HOST).rstrip("/")
     url = f"{base}/api/tags"
 
@@ -1392,6 +1407,7 @@ def check_ollama_available(host: str | None = None) -> tuple[bool, str]:
                 return True, "Ollama service is reachable"
             return False, f"Ollama returned HTTP {response.status}"
     except urllib.error.URLError as exc:
+        # Covers refused connections, DNS failures, and request timeouts.
         return False, f"Cannot reach Ollama at {base}: {exc.reason}"
     except Exception as exc:  # noqa: BLE001 - educational surface area
         return False, f"Ollama check failed: {exc}"
@@ -1399,8 +1415,6 @@ def check_ollama_available(host: str | None = None) -> tuple[bool, str]:
 
 def list_local_models(host: str | None = None) -> list[str]:
     """Return names of models currently installed in Ollama."""
-    import urllib.request
-
     base = (host or config.OLLAMA_HOST).rstrip("/")
     url = f"{base}/api/tags"
 
@@ -1408,7 +1422,6 @@ def list_local_models(host: str | None = None) -> list[str]:
         payload = json.loads(response.read().decode("utf-8"))
 
     names: list[str] = []
-    # Loop over the model list returned by Ollama
     for item in payload.get("models", []):
         name = item.get("name") or item.get("model")
         if name:
@@ -1449,6 +1462,59 @@ def _prepare_image_bytes(
         return image_bytes
 
 
+# ---------------------------------------------------------------------------
+# How FoodCalories talks to Ollama (teaching notes for beginners / Cline)
+# ---------------------------------------------------------------------------
+# Client comes from the ``ollama`` Python package (see requirements.txt).
+# host     → which machine/port runs the Ollama service (config.OLLAMA_HOST)
+# model    → which installed vision-language model to use (config.OLLAMA_MODEL)
+# messages → the conversation sent to the model; here one user turn
+# role     → "user" marks this message as the human/application input
+# content  → the text prompt describing the task
+# images   → a list of photograph payloads as raw image bytes
+# format   → "json" asks Ollama for a JSON-formatted answer
+# stream   → False waits for the full reply (no token chunks)
+# options  → inference settings such as temperature and context size
+# response.message.content → the model's text (JSON string, sometimes already
+#                            parsed by the SDK into a dict)
+# json.loads / _extract_json_object → turn JSON text into Python objects
+# validate_meal_result → schema check; valid JSON can still be the wrong shape
+#
+# Minimal copyable example (EXAMPLE ONLY — not production config):
+#
+#   from ollama import Client
+#   import json
+#
+#   # Example setup (replace with your own host/model/image path)
+#   example_host = "http://localhost:11434"
+#   example_model = "qwen3-vl:4b-instruct"
+#   example_prompt = "List the main foods in this photo as JSON."
+#   with open("samples/verify/apple.jpg", "rb") as image_file:
+#       example_image_bytes = image_file.read()
+#
+#   client = Client(host=example_host)
+#   response = client.chat(
+#       model=example_model,
+#       messages=[
+#           {
+#               "role": "user",
+#               "content": example_prompt,
+#               "images": [example_image_bytes],
+#           }
+#       ],
+#       format="json",
+#       stream=False,
+#       options={"temperature": 0.2, "num_ctx": 4096},
+#   )
+#   content = response.message.content
+#   data = content if isinstance(content, dict) else json.loads(str(content))
+#   # data is now a Python dict; still validate it against your schema.
+#
+# Production behaviour lives in ``_call_ollama_vision`` below (host, model,
+# preprocessing, options, and MealAnalysis validation come from this project).
+# ---------------------------------------------------------------------------
+
+
 def _call_ollama_vision(
     image_bytes: bytes,
     prompt: str,
@@ -1456,49 +1522,58 @@ def _call_ollama_vision(
     max_side: int | None = None,
 ) -> dict:
     """
-    Send image bytes and a prompt to Ollama.
+    Send a food photograph and prompt to Ollama; return a validated meal dict.
 
-    This is where Python calls the AI model.
-    Uses format="json" for reliable structured replies with qwen3-vl.
+    Steps (in order):
+      1. Receive ``image_bytes`` and ``prompt``.
+      2. Preprocess/resize the image when required (``_prepare_image_bytes``).
+      3. Create an Ollama ``Client`` for ``config.OLLAMA_HOST``.
+      4. Call ``client.chat`` with the vision model, prompt and image bytes.
+      5. Request structured JSON via ``format="json"`` (``stream=False``).
+      6. Read ``response.message.content``.
+      7. Parse JSON text into a Python object when needed.
+      8. Validate with ``validate_meal_result`` (schema may still reject it).
+      9. Return the validated dictionary, or raise ``ValueError`` on bad output.
+
+    Configuration (host, model, temperature, num_ctx, image size) comes from
+    ``config.py``. Callers such as ``analyse_meal`` handle retries and cache.
     """
-    from ollama import Client
+    # 1–2. Prepare image bytes for the model (downscale / JPEG normalise).
+    prepared = _prepare_image_bytes(image_bytes, max_side=max_side)
 
-    # Create a client pointed at the configured host
+    # 3. Client aimed at the configured Ollama service.
     client = Client(host=config.OLLAMA_HOST)
 
-    # Shrink oversized images so vision tokens fit num_ctx
-    side = int(max_side) if max_side is not None else int(config.IMAGE_MAX_SIDE)
-    prepared = _prepare_image_bytes(image_bytes, max_side=side)
-
-    messages = [
-        {
-            "role": "user",
-            "content": prompt,
-            "images": [prepared],
-        }
-    ]
-
-    options = {
-        "temperature": config.OLLAMA_TEMPERATURE,
-        "num_ctx": config.OLLAMA_NUM_CTX,
-    }
-
+    # 4–5. One user message: text prompt + photograph bytes; ask for JSON.
     response = client.chat(
         model=config.OLLAMA_MODEL,
-        messages=messages,
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+                "images": [prepared],
+            }
+        ],
         format="json",
-        options=options,
+        stream=False,
+        options={
+            "temperature": config.OLLAMA_TEMPERATURE,
+            "num_ctx": config.OLLAMA_NUM_CTX,
+        },
     )
 
+    # 6. Model text lives on the chat response message.
     content = response.message.content
     if not content:
         raise ValueError("Model returned an empty response")
 
+    # 7. SDK may already return a dict; otherwise parse JSON text.
     if isinstance(content, dict):
         raw = content
     else:
         raw = _extract_json_object(str(content))
 
+    # 8–9. Schema validation; propagate ValueError to callers.
     return validate_meal_result(raw)
 
 
