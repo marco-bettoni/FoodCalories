@@ -254,6 +254,5 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# STUDENT EXERCISE:
-# Show analysis teaching fields, or compare the separate VLM kcal guess
-# with the Python CSV personal-portion total above.
+# Results rendering ends here. New analysis fields from vision.analyse_meal
+# can be shown above this note without changing calorie math in nutrition.py.

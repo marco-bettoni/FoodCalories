@@ -132,16 +132,3 @@ def clear_cache(cache_dir: Path | None = None) -> int:
         removed += 1
 
     return removed
-
-
-# ==========================================
-# STUDENT EXERCISE
-# ==========================================
-# Add a function that lists cache entries with their file sizes, for example:
-#
-# def list_cache_entries(cache_dir: Path | None = None) -> list[dict]:
-#     directory = ensure_cache_dir(cache_dir)
-#     entries = []
-#     for path in directory.glob("*.json"):
-#         entries.append({"key": path.stem, "bytes": path.stat().st_size})
-#     return entries

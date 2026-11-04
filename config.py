@@ -69,10 +69,8 @@ OLLAMA_NUM_CTX = int(os.environ.get("OLLAMA_NUM_CTX", "4096"))
 # ==========================================
 
 # Longest side (pixels) sent to Ollama. Display uses the original upload.
-# Chosen from the samples/ resolution benchmark (see latest report_*.txt).
-# Benchmark (50 samples × 5 sizes): 512 loses major shared dishes (plov,
-# beshbarmak); 768 matches 1024 usable count with better cake recognition
-# and keeps family-dish coverage. Fallback retries at IMAGE_FALLBACK_MAX_SIDE.
+# 768 balances shared-dish coverage against simpler single-food photos;
+# incomplete primary passes retry once at IMAGE_FALLBACK_MAX_SIDE.
 IMAGE_MAX_SIDE = int(os.environ.get("IMAGE_MAX_SIDE", "768"))
 
 # Bump when preprocess behaviour changes (resize policy, JPEG quality, etc.)
@@ -87,8 +85,8 @@ IMAGE_FALLBACK_MAX_SIDE = int(os.environ.get("IMAGE_FALLBACK_MAX_SIDE", "1024"))
 
 # Bump these when the prompt or expected JSON shape changes,
 # so old cache entries are not reused incorrectly.
-PROMPT_VERSION = "v12"
-SCHEMA_VERSION = "v12"
+PROMPT_VERSION = "v13"
+SCHEMA_VERSION = "v13"
 
 # ==========================================
 # STUDENT EXERCISE

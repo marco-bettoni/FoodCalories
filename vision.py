@@ -135,21 +135,12 @@ CALORIES
 - If food is visible but its composition is uncertain, preserve a
   reasonable whole-meal estimate rather than inventing ingredients.
 
-ADDITIONAL FIELDS
-- allergens: potential indicators chosen only from
-  peanuts, tree nuts, milk, eggs, wheat/gluten, soy, fish,
-  crustaceans, molluscs, sesame.
-- spiciness: none, mild, medium, hot or unknown.
-- These are possible visual clues, not reliable safety assessments.
-
 RETURN THESE JSON FIELDS
 dish_name: string or null
 dish_confidence: high, medium, low or null
 is_family_sized: boolean
 suggested_servings: number, minimum 1
 ai_calorie_estimate: number or null
-allergens: array of allowed strings
-spiciness: none, mild, medium, hot or unknown
 ingredients: array of objects with
   name: concise English component name
   grams: estimated edible grams
@@ -188,8 +179,7 @@ estimate rather than fabricating components.
 
 Include the same JSON fields as the main prompt:
 dish_name, dish_confidence, is_family_sized,
-suggested_servings, ai_calorie_estimate,
-allergens, spiciness and ingredients.
+suggested_servings, ai_calorie_estimate and ingredients.
 
 Each ingredient has name, grams, count and grams_per_piece.
 Use null for unknown optional fields.
@@ -206,8 +196,6 @@ DEMO_MEAL_RESULT: dict[str, Any] = {
     "is_family_sized": False,
     "suggested_servings": 1,
     "ai_calorie_estimate": 520,
-    "allergens": [],
-    "spiciness": "none",
     "ingredients": [
         {"name": "chicken breast", "grams": 150},
         {"name": "rice", "grams": 180},
@@ -216,20 +204,6 @@ DEMO_MEAL_RESULT: dict[str, Any] = {
 }
 
 DishConfidence = Literal["high", "medium", "low"]
-Spiciness = Literal["none", "mild", "medium", "hot", "unknown"]
-
-ALLOWED_ALLERGENS = {
-    "peanuts",
-    "tree nuts",
-    "milk",
-    "eggs",
-    "wheat/gluten",
-    "soy",
-    "fish",
-    "crustaceans",
-    "molluscs",
-    "sesame",
-}
 
 # Synonym groups used to merge duplicate component rows after parsing.
 _DUPLICATE_NAME_GROUPS: tuple[frozenset[str], ...] = (
@@ -460,9 +434,6 @@ class MealAnalysis(BaseModel):
     is_family_sized: bool = False
     suggested_servings: float = 1.0
     ai_calorie_estimate: float | None = None
-    # Reserved for student exercises — validated but not shown in the UI yet
-    allergens: list[str] = Field(default_factory=list)
-    spiciness: Spiciness = "unknown"
     ingredients: list[Ingredient] = Field(default_factory=list)
     # Filled by Python post-validation when portions look implausible
     warnings: list[str] = Field(default_factory=list)
@@ -542,57 +513,6 @@ class MealAnalysis(BaseModel):
         if kcal < 0:
             return None
         return kcal
-
-    @field_validator("allergens", mode="before")
-    @classmethod
-    def normalise_allergens(cls, value: Any) -> list[str]:
-        if value is None or value == "":
-            return []
-        if isinstance(value, str):
-            parts = [part.strip() for part in value.replace(",", "|").split("|")]
-        elif isinstance(value, list):
-            parts = [str(item).strip() for item in value]
-        else:
-            return []
-        cleaned: list[str] = []
-        seen: set[str] = set()
-        for part in parts:
-            key = part.lower()
-            # Accept common spelling variants
-            aliases = {
-                "gluten": "wheat/gluten",
-                "wheat": "wheat/gluten",
-                "wheat gluten": "wheat/gluten",
-                "crustacean": "crustaceans",
-                "shellfish": "crustaceans",
-                "mollusc": "molluscs",
-                "mollusk": "molluscs",
-                "mollusks": "molluscs",
-                "tree nut": "tree nuts",
-                "nut": "tree nuts",
-                "nuts": "tree nuts",
-                "egg": "eggs",
-                "peanut": "peanuts",
-            }
-            key = aliases.get(key, key)
-            if key in ALLOWED_ALLERGENS and key not in seen:
-                seen.add(key)
-                cleaned.append(key)
-        return cleaned
-
-    @field_validator("spiciness", mode="before")
-    @classmethod
-    def normalise_spiciness(cls, value: Any) -> str:
-        if value is None or value == "":
-            return "unknown"
-        text = str(value).strip().lower()
-        if text in {"none", "mild", "medium", "hot", "unknown"}:
-            return text
-        if text in {"not spicy", "no spice", "0"}:
-            return "none"
-        if text in {"spicy", "very hot", "extra hot"}:
-            return "hot"
-        return "unknown"
 
 
 # ==========================================
@@ -1312,6 +1232,8 @@ def _normalise_raw_payload(data: Any) -> Any:
         return data
 
     family_sized = bool(data.get("is_family_sized", False))
+    # Unknown extra keys (e.g. legacy allergens/spiciness) are dropped here
+    # so old cached JSON still validates against the current schema.
     cleaned: dict[str, Any] = {
         "dish_name": data.get("dish_name"),
         "dish_confidence": data.get("dish_confidence"),
@@ -1321,8 +1243,6 @@ def _normalise_raw_payload(data: Any) -> Any:
             "ai_calorie_estimate",
             data.get("ai_total_kcal"),
         ),
-        "allergens": data.get("allergens") or [],
-        "spiciness": data.get("spiciness", "unknown"),
         "ingredients": [],
         "warnings": list(data.get("warnings") or []),
     }
@@ -1639,9 +1559,6 @@ def analyse_meal(
     Returns:
         A dictionary with dish fields and ingredients, plus meta:
         from_cache, demo_mode, cache_key, image_max_side.
-
-        allergens and spiciness are included for student exercises but
-        must not be displayed in the Streamlit UI yet.
     """
     active_prompt = prompt if prompt is not None else DEFAULT_PROMPT
     side = int(max_side) if max_side is not None else int(config.IMAGE_MAX_SIDE)
@@ -1747,8 +1664,8 @@ def analyse_meal(
     return result
 
 
-# ==========================================
-# STUDENT EXERCISE
-# ==========================================
-# Display allergens / spiciness in the UI, or compare ai_calorie_estimate
-# against the Python CSV total. Bump config.PROMPT_VERSION after prompt edits.
+# Extension points for new recognition fields:
+# 1) DEFAULT_PROMPT / FALLBACK_PROMPT — ask the model for extra JSON keys
+# 2) MealAnalysis — validate those keys
+# 3) app.py — render them in the read-only results UI
+# After prompt or schema changes, bump config.PROMPT_VERSION / SCHEMA_VERSION.

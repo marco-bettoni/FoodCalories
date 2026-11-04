@@ -42,7 +42,7 @@ Max content width ~920px, centered. Generous vertical rhythm (1.5–2.5rem). Des
 - Display modes: (1) matched CSV components → `{n} kcal` + Total row (headline equals row sum); (2) no credible matched component → “Estimate unavailable”. No `Other food (estimated)`, no `At least` prefix.
 - Shared dishes only: muted note with estimated serving count from the photograph.
 - Read-only component table: Food | Amount | kcal. Amounts and calories are for one suggested serving. Vague sauces, unmatched rows and garnish crumbs are omitted (not shown as dashes). Dish names never appear as component rows. Integer kcal rows must sum to the headline.
-- Never invent CSV calories from AI. Never invent a balancing calorie row. Never silently add the AI estimate to the CSV total. Independent AI estimate, allergens and spiciness stay in structured output for exercises — never rendered.
+- Never invent CSV calories from AI. Never invent a balancing calorie row. Never silently add the AI estimate to the CSV total. The independent AI calorie estimate is for educational comparison only and is not rendered in the student-facing UI.
 - Disclaimer: one muted caption — “Photographic estimates are approximate.”
 
 ## Motion

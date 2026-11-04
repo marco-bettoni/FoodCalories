@@ -7,8 +7,8 @@ import vision
 
 
 def test_schema_and_prompt_versions_bumped():
-    assert config.PROMPT_VERSION.startswith("v12")
-    assert config.SCHEMA_VERSION == "v12"
+    assert config.PROMPT_VERSION.startswith("v13")
+    assert config.SCHEMA_VERSION == "v13"
 
 
 def test_prompt_requires_english_generic_names():
@@ -23,8 +23,8 @@ def test_prompt_requires_english_generic_names():
     assert "filename" in prompt
     assert "jianbing" in prompt
     assert "ai_calorie_estimate" in prompt
-    assert "allergens" in prompt
-    assert "spiciness" in prompt
+    assert "allergens" not in prompt
+    assert "spiciness" not in prompt
     assert "suggested_servings" in prompt
     assert "family" in prompt or "shared" in prompt
     assert "components" in prompt
@@ -47,8 +47,8 @@ def test_validate_meal_result_ok():
     assert result["dish_name"] == "Rice bowl"
     assert result["ingredients"][0]["grams"] == 200
     assert result["suggested_servings"] == 1
-    assert result["spiciness"] == "unknown"
-    assert result["allergens"] == []
+    assert "allergens" not in result
+    assert "spiciness" not in result
     assert "visible" not in result["ingredients"][0]
     assert "assumptions" not in result
 
@@ -117,18 +117,30 @@ def test_family_servings_and_ai_estimate():
             "is_family_sized": True,
             "suggested_servings": 4,
             "ai_calorie_estimate": 2200,
-            "allergens": ["soy", "wheat", "Shellfish"],
-            "spiciness": "hot",
             "ingredients": [{"name": "broth", "grams": 800}],
         }
     )
     assert result["is_family_sized"] is True
     assert result["suggested_servings"] == 4
     assert result["ai_calorie_estimate"] == 2200
-    assert "soy" in result["allergens"]
-    assert "wheat/gluten" in result["allergens"]
-    assert "crustaceans" in result["allergens"]
-    assert result["spiciness"] == "hot"
+
+
+def test_legacy_allergen_spiciness_fields_ignored():
+    """Old cached JSON may still contain exercise fields; validation must not fail."""
+    result = vision.validate_meal_result(
+        {
+            "dish_name": "Hot pot",
+            "is_family_sized": True,
+            "suggested_servings": 4,
+            "ai_calorie_estimate": 2200,
+            "allergens": ["soy", "wheat", "Shellfish"],
+            "spiciness": "hot",
+            "ingredients": [{"name": "broth", "grams": 800}],
+        }
+    )
+    assert result["ai_calorie_estimate"] == 2200
+    assert "allergens" not in result
+    assert "spiciness" not in result
 
 
 def test_malformed_empty_response_raises():
@@ -246,8 +258,8 @@ def test_demo_mode_analyse_meal():
     assert result["from_cache"] is False
     assert len(result["ingredients"]) >= 1
     assert "assumptions" not in result
-    assert "allergens" in result
-    assert "spiciness" in result
+    assert "allergens" not in result
+    assert "spiciness" not in result
     assert all("grams" in item for item in result["ingredients"])
 
 
