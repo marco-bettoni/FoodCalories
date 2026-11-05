@@ -11,8 +11,9 @@ import vision
 
 
 def test_schema_and_prompt_versions_bumped():
-    assert config.PROMPT_VERSION.startswith("v13")
+    assert config.PROMPT_VERSION.startswith("v14")
     assert config.SCHEMA_VERSION == "v13"
+    assert not hasattr(vision, "FALLBACK_PROMPT")
 
 
 def test_prompt_requires_english_generic_names():
@@ -640,3 +641,152 @@ def test_call_ollama_vision_invalid_schema_raises(monkeypatch):
 
     with pytest.raises(ValueError, match="Invalid model output"):
         vision._call_ollama_vision(b"img", "prompt")
+
+
+def _stub_ollama_ready(monkeypatch):
+    monkeypatch.setattr(vision, "check_ollama_available", lambda: (True, "ok"))
+    monkeypatch.setattr(vision, "model_is_installed", lambda: True)
+
+
+def test_analyse_meal_valid_first_response(monkeypatch):
+    _stub_ollama_ready(monkeypatch)
+    payload = {
+        "dish_name": "Apple",
+        "ingredients": [{"name": "apple", "grams": 180}],
+        "ai_calorie_estimate": 95,
+    }
+    calls: list[tuple[str, int | None]] = []
+
+    def fake_call(image_bytes, prompt, *, max_side=None):
+        calls.append((prompt, max_side))
+        return vision.validate_meal_result(payload)
+
+    monkeypatch.setattr(vision, "_call_ollama_vision", fake_call)
+    monkeypatch.setattr(vision.cache, "load_cached_result", lambda key: None)
+    monkeypatch.setattr(vision.cache, "save_cached_result", lambda key, data: None)
+
+    result = vision.analyse_meal(b"img", use_cache=False)
+    assert result["dish_name"] == "Apple"
+    assert len(calls) == 1
+    assert calls[0][0] is vision.DEFAULT_PROMPT
+    assert calls[0][1] == config.IMAGE_MAX_SIDE
+
+
+def test_analyse_meal_retries_malformed_json_with_same_prompt(monkeypatch):
+    _stub_ollama_ready(monkeypatch)
+    good = vision.validate_meal_result(
+        {
+            "dish_name": "Banana",
+            "ingredients": [{"name": "banana", "grams": 120}],
+            "ai_calorie_estimate": 105,
+        }
+    )
+    calls: list[tuple[str, int | None]] = []
+
+    def fake_call(image_bytes, prompt, *, max_side=None):
+        calls.append((prompt, max_side))
+        if len(calls) == 1:
+            raise ValueError("Model returned malformed JSON")
+        return good
+
+    monkeypatch.setattr(vision, "_call_ollama_vision", fake_call)
+    monkeypatch.setattr(vision.cache, "load_cached_result", lambda key: None)
+    monkeypatch.setattr(vision.cache, "save_cached_result", lambda key, data: None)
+
+    result = vision.analyse_meal(b"img", use_cache=False)
+    assert result["dish_name"] == "Banana"
+    assert len(calls) == 2
+    assert calls[0][0] is vision.DEFAULT_PROMPT
+    assert calls[1][0] is vision.DEFAULT_PROMPT
+    assert calls[0][1] == calls[1][1] == config.IMAGE_MAX_SIDE
+
+
+def test_analyse_meal_retries_empty_ingredients_with_same_prompt(monkeypatch):
+    _stub_ollama_ready(monkeypatch)
+    empty = vision.validate_meal_result(
+        {"dish_name": None, "ingredients": [], "ai_calorie_estimate": None}
+    )
+    filled = vision.validate_meal_result(
+        {
+            "dish_name": "Bread",
+            "ingredients": [{"name": "bread", "grams": 60}],
+            "ai_calorie_estimate": 160,
+        }
+    )
+    calls: list[tuple[str, int | None]] = []
+
+    def fake_call(image_bytes, prompt, *, max_side=None):
+        calls.append((prompt, max_side))
+        return empty if len(calls) == 1 else filled
+
+    monkeypatch.setattr(vision, "_call_ollama_vision", fake_call)
+    monkeypatch.setattr(vision.cache, "load_cached_result", lambda key: None)
+    monkeypatch.setattr(vision.cache, "save_cached_result", lambda key, data: None)
+
+    result = vision.analyse_meal(b"img", use_cache=False)
+    assert result["ingredients"][0]["name"] == "bread"
+    assert len(calls) == 2
+    assert all(prompt is vision.DEFAULT_PROMPT for prompt, _ in calls)
+
+
+def test_analyse_meal_exhausted_retries_raises_first_error(monkeypatch):
+    _stub_ollama_ready(monkeypatch)
+
+    def fake_call(image_bytes, prompt, *, max_side=None):
+        raise ValueError("Model returned malformed JSON")
+
+    monkeypatch.setattr(vision, "_call_ollama_vision", fake_call)
+    monkeypatch.setattr(vision.cache, "load_cached_result", lambda key: None)
+
+    with pytest.raises(ValueError, match="malformed JSON"):
+        vision.analyse_meal(b"img", use_cache=False)
+
+
+def test_analyse_meal_hires_retry_uses_canonical_prompt(monkeypatch):
+    _stub_ollama_ready(monkeypatch)
+    incomplete = vision.validate_meal_result(
+        {
+            "dish_name": "Meal",
+            "ingredients": [{"name": "herb", "grams": 5}],
+            "ai_calorie_estimate": 500,
+        }
+    )
+    complete = vision.validate_meal_result(
+        {
+            "dish_name": "Chicken rice",
+            "ingredients": [
+                {"name": "chicken breast", "grams": 150},
+                {"name": "rice", "grams": 180},
+            ],
+            "ai_calorie_estimate": 520,
+        }
+    )
+    calls: list[tuple[str, int | None]] = []
+
+    def fake_call(image_bytes, prompt, *, max_side=None):
+        calls.append((prompt, max_side))
+        return incomplete if max_side == config.IMAGE_MAX_SIDE else complete
+
+    monkeypatch.setattr(vision, "_call_ollama_vision", fake_call)
+    monkeypatch.setattr(vision.cache, "load_cached_result", lambda key: None)
+    monkeypatch.setattr(vision.cache, "save_cached_result", lambda key, data: None)
+
+    result = vision.analyse_meal(b"img", use_cache=False)
+    assert result["dish_name"] == "Chicken rice"
+    assert result["image_max_side"] == config.IMAGE_FALLBACK_MAX_SIDE
+    assert len(calls) == 2
+    assert calls[0] == (vision.DEFAULT_PROMPT, config.IMAGE_MAX_SIDE)
+    assert calls[1] == (vision.DEFAULT_PROMPT, config.IMAGE_FALLBACK_MAX_SIDE)
+
+
+def test_analyse_meal_custom_prompt_skips_retries(monkeypatch):
+    _stub_ollama_ready(monkeypatch)
+
+    def fake_call(image_bytes, prompt, *, max_side=None):
+        raise ValueError("Model returned malformed JSON")
+
+    monkeypatch.setattr(vision, "_call_ollama_vision", fake_call)
+    monkeypatch.setattr(vision.cache, "load_cached_result", lambda key: None)
+
+    with pytest.raises(ValueError, match="malformed JSON"):
+        vision.analyse_meal(b"img", use_cache=False, prompt="custom only")

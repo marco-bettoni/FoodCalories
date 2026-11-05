@@ -153,45 +153,6 @@ ingredients: array of objects with
 Return no explanations. Never use the filename.
 """.strip()
 
-# Used once when the first call returns no usable ingredients.
-FALLBACK_PROMPT = """
-Look carefully at the main edible food in this image.
-Use visual evidence only, never the filename. Return valid JSON only.
-
-Identify the main FOOD COMPONENTS, not the complete dish name.
-Ignore decorative foods, background objects, tiny garnishes and
-hypothetical recipe ingredients.
-
-Use generic component names and realistic edible weights.
-Name a sauce only when its type is visually clear; never invent
-"sauce, unspecified" or similar vague sauce labels.
-For a sandwich, identify its bread, protein and substantial fillings.
-For a crepe or jianbing, identify its cooked wrapper and any clearly
-identifiable filling.
-For siu mai, prefer dish_name "Siu mai" and component "dumpling"
-with count and grams_per_piece.
-For curry fish balls, list fish balls and curry sauce separately
-with realistic sauce weight.
-For individual chocolates or candies, estimate count and average
-weight per piece.
-For a shared platter, estimate the number of personal servings.
-
-Do not invent ingredients when the food's interior is unknown.
-If decomposition is unreliable, provide a whole-meal AI calorie
-estimate rather than fabricating components.
-
-Include the same JSON fields as the main prompt:
-dish_name, dish_confidence, is_family_sized,
-suggested_servings, ai_calorie_estimate and ingredients.
-
-Each ingredient has name, grams, count and grams_per_piece.
-Use null for unknown optional fields.
-
-An obvious apple, banana, bread, chocolate, cooked meat or other
-recognisable basic food should appear as a component.
-A complete meal name must never appear as an ingredient.
-""".strip()
-
 # Sample payload for offline unit tests (not shown in the UI)
 DEMO_MEAL_RESULT: dict[str, Any] = {
     "dish_name": "Chicken rice bowl",
@@ -1680,35 +1641,35 @@ def analyse_meal(
             f"Run: ollama pull {config.OLLAMA_MODEL}"
         )
 
-    def _run_once(active: str, *, resolve_side: int) -> dict:
-        return _call_ollama_vision(image_bytes, active, max_side=resolve_side)
+    def _run_once(*, resolve_side: int) -> dict:
+        return _call_ollama_vision(image_bytes, active_prompt, max_side=resolve_side)
 
-    # Call the vision model (this is the expensive step).
-    # Malformed JSON happens on busy photos; retry once with the short prompt.
+    # Primary recognition call. On malformed JSON or no usable ingredients,
+    # retry once with the same canonical prompt at the same resolution.
+    # Custom prompts skip retries so callers keep full control.
+    first_error: Exception | None = None
+    result: dict | None = None
     try:
-        result = _run_once(active_prompt, resolve_side=side)
-    except (ValueError, json.JSONDecodeError) as first_error:
+        result = _run_once(resolve_side=side)
+    except (ValueError, json.JSONDecodeError) as err:
         if prompt is not None:
             raise
-        try:
-            result = _run_once(FALLBACK_PROMPT, resolve_side=side)
-        except (ValueError, json.JSONDecodeError):
-            raise first_error from first_error
+        first_error = err
 
-    # Retry with the simpler prompt when the first reply is empty or unusable
-    if (
-        prompt is None
-        and not _usable_ingredients(result)
-        and active_prompt != FALLBACK_PROMPT
-    ):
+    if prompt is None and (result is None or not _usable_ingredients(result)):
         try:
-            retry = _run_once(FALLBACK_PROMPT, resolve_side=side)
+            retry = _run_once(resolve_side=side)
         except (ValueError, json.JSONDecodeError):
             retry = None
-        if retry and _usable_ingredients(retry):
+        if retry is not None and (result is None or _usable_ingredients(retry)):
             result = retry
 
-    # Incomplete primary pass → one higher-resolution retry (not cached as primary)
+    if result is None:
+        if first_error is not None:
+            raise first_error
+        raise RuntimeError("Recognition failed without a usable model response.")
+
+    # Incomplete recognition → one higher-resolution retry with the same prompt
     fallback_side = int(config.IMAGE_FALLBACK_MAX_SIDE)
     if (
         prompt is None
@@ -1716,7 +1677,7 @@ def analyse_meal(
         and fallback_side > side
     ):
         try:
-            hi_res = _run_once(active_prompt, resolve_side=fallback_side)
+            hi_res = _run_once(resolve_side=fallback_side)
         except (ValueError, json.JSONDecodeError):
             hi_res = None
         if hi_res is not None and (
@@ -1740,7 +1701,7 @@ def analyse_meal(
 
 
 # Extension points for new recognition fields:
-# 1) DEFAULT_PROMPT / FALLBACK_PROMPT — ask the model for extra JSON keys
+# 1) DEFAULT_PROMPT — ask the model for extra JSON keys (single canonical prompt)
 # 2) MealAnalysis — validate those keys
 # 3) app.py — render them in the read-only results UI
 # After prompt or schema changes, bump config.PROMPT_VERSION / SCHEMA_VERSION.

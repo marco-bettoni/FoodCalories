@@ -85,7 +85,7 @@ IMAGE_FALLBACK_MAX_SIDE = int(os.environ.get("IMAGE_FALLBACK_MAX_SIDE", "1024"))
 
 # Bump these when the prompt or expected JSON shape changes,
 # so old cache entries are not reused incorrectly.
-PROMPT_VERSION = "v13"
+PROMPT_VERSION = "v14"
 SCHEMA_VERSION = "v13"
 
 # ==========================================

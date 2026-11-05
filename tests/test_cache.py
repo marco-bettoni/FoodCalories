@@ -52,7 +52,7 @@ def test_build_cache_key_changes_with_schema_version():
     assert key_a != key_b
 
 
-def test_default_versions_are_v13():
+def test_default_versions_are_current():
     key = cache.build_cache_key(b"photo")
     explicit = cache.build_cache_key(
         b"photo",
@@ -62,8 +62,9 @@ def test_default_versions_are_v13():
         image_max_side=config.IMAGE_MAX_SIDE,
     )
     assert key == explicit
-    assert config.PROMPT_VERSION.startswith("v13")
+    assert config.PROMPT_VERSION.startswith("v14")
     assert config.SCHEMA_VERSION == "v13"
+    assert config.PREPROCESS_VERSION.startswith("v12")
 
 
 def test_build_cache_key_changes_with_resolution():
